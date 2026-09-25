@@ -5,27 +5,13 @@ import GpaCalculator from "@/components/calculators/GpaCalculator";
 export const metadata: Metadata = {
   title: "GPA Calculator — Calculate Your GPA Online",
   description:
-    "Calculate your GPA from subject grades and credits with a free, accurate online GPA calculator. Supports a configurable 4.0-style grading scale.",
+    "Calculate your GPA from subject grades and credits with a free, accurate online GPA calculator. Uses a default 4.0-style example grading scale.",
   alternates: { canonical: "/calculators/gpa" },
-};
-
-const breadcrumbJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-    { "@type": "ListItem", position: 2, name: "Calculators", item: "/calculators" },
-    { "@type": "ListItem", position: 3, name: "GPA Calculator", item: "/calculators/gpa" },
-  ],
 };
 
 export default function GpaCalculatorPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
       <nav aria-label="Breadcrumb" className="text-sm text-slate mb-6">
         <Link href="/" className="hover:text-emerald">Home</Link>
         <span className="mx-2">/</span>
