@@ -5,12 +5,19 @@ export function getSiteUrl(): string {
 
   if (configured) return configured;
 
+  const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercelProductionUrl) {
+    return vercelProductionUrl.startsWith("http")
+      ? vercelProductionUrl.replace(/\/+$/, "")
+      : `https://${vercelProductionUrl.replace(/\/+$/, "")}`;
+  }
+
   if (process.env.NODE_ENV !== "production") {
     return "http://localhost:3000";
   }
 
   throw new Error(
-    "NEXT_PUBLIC_SITE_URL is required in production. Set it in your deployment environment."
+    "NEXT_PUBLIC_SITE_URL or VERCEL_PROJECT_PRODUCTION_URL is required in production."
   );
 }
 
