@@ -1,0 +1,54 @@
+# StudentCalc
+
+> Free calculators and study tools for students, with an initial focus on Sri Lankan
+> students. No account required. Calculator inputs are processed in the browser and are
+> not sent to a server; planning tools use browser localStorage only.
+
+StudentCalc is an independent student utility site. It is not affiliated with, endorsed
+by, or an official channel of any government department, examination authority, or
+university — including Sri Lanka's Department of Examinations or University Grants
+Commission (UGC).
+
+## Calculators
+- [GPA Calculator](/calculators/gpa): Calculate GPA from subject grades and credits using a configurable 4.0-style scale.
+- [Percentage Calculator](/calculators/percentage): Calculate percentage of, percentage increase/decrease, and percentage difference.
+- [Grade Calculator](/calculators/grade): Convert numeric marks into letter grades using a configurable grading scale.
+- [Attendance Calculator](/calculators/attendance): Calculate attendance percentage, classes you can still miss, and classes needed to reach a target.
+- [Average Calculator](/calculators/average): Calculate the mean of a set of numbers.
+- [Weighted Average Calculator](/calculators/weighted-average): Calculate a weighted average from values and their weights.
+- [Marks Needed Calculator](/calculators/marks-needed): Calculate the score required on remaining assessments to reach a target grade.
+- [Exam Score Calculator](/calculators/exam-score): Track current weighted exam score across multiple graded components.
+- [Study Hours Calculator](/calculators/study-hours): Estimate available study hours before an exam and how to split them across subjects.
+
+## Student Tools
+- [Exam Countdown](/tools/exam-countdown): Live countdown timer to an exam date and time.
+- [Study Timer](/tools/study-timer): A simple distraction-free study timer with custom duration.
+- [Pomodoro](/tools/pomodoro): Configurable focus/break session timer.
+- [Study Planner](/tools/study-planner): Splits available study hours across subjects by priority. Saved locally in the browser.
+- [Semester Planner](/tools/semester-planner): Tracks modules, assignments, and exam deadlines. Saved locally in the browser.
+- [Assignment Deadline Tracker](/tools/assignment-deadline): Tracks individual assignment due dates. Saved locally in the browser.
+
+## Sri Lankan A/L Resources
+- [A/L Hub](/a-level): Overview of Sri Lankan A/L resources on the site.
+- [Z-Score](/a-level/z-score): Explains the Z-score concept (Z = (X − mean) / standard deviation) and provides an educational calculator. This is explicitly NOT the official UGC admissions Z-score methodology.
+- [University Selection](/a-level/university-selection): General, non-numeric overview of how post-A/L university selection works. Does not publish specific cutoffs — those change yearly and are set by the UGC.
+- [Subjects](/a-level/subjects): Directory of A/L subject streams (Physical Science, Biological Science, Commerce, Arts, Technology).
+- [Resources](/a-level/resources): Links to the official Department of Examinations and UGC websites.
+
+## Guides
+- [How to Calculate GPA](/guides/how-to-calculate-gpa)
+- [How to Calculate Percentage](/guides/how-to-calculate-percentage)
+- [How Attendance Percentage Works](/guides/how-attendance-percentage-works)
+- [How to Calculate an Average](/guides/how-to-calculate-average)
+- [How Weighted Averages Work](/guides/how-weighted-average-works)
+- [How to Calculate Marks Needed](/guides/how-to-calculate-marks-needed)
+- [How Z-Scores Work](/guides/how-z-score-works)
+- [How to Plan Study Time](/guides/how-to-plan-study-time)
+- [How to Prepare for Exams](/guides/how-to-prepare-for-exams)
+
+## Policies
+- [About](/about)
+- [Privacy Policy](/privacy): No accounts, no server-side storage of calculator inputs, localStorage for planners only, no analytics or ads currently installed.
+- [Terms of Use](/terms)
+- [Disclaimer](/disclaimer): Calculations are informational; grading/attendance scales are examples, not universal standards; not an official examination or admissions authority.
+- [FAQ](/faq)
