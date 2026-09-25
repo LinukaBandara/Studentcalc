@@ -11,10 +11,16 @@ describe("calculateCountdown", () => {
     }
   });
 
-  it("detects today", () => {
+  it("detects today using the UTC calendar date", () => {
     const now = new Date("2030-01-01T08:00:00Z");
     const r = calculateCountdown("2030-01-01T20:00:00Z", now);
     if (!isCountdownError(r)) expect(r.status).toBe("today");
+  });
+
+  it("keeps today semantics stable across local timezones", () => {
+    const now = new Date("2030-01-01T23:00:00Z");
+    const r = calculateCountdown("2030-01-02T01:00:00Z", now);
+    if (!isCountdownError(r)) expect(r.status).toBe("future");
   });
 
   it("detects a past date", () => {
