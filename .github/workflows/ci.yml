@@ -1,0 +1,34 @@
+name: StudentCalc CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_SITE_URL: https://studentcalc.example
+          NEXT_PUBLIC_CONTACT_EMAIL: hello@studentcalc.example
+        run: npm run build
