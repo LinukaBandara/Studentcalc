@@ -7,62 +7,42 @@ import {
   isPercentageError,
 } from "@/lib/calculations/percentage";
 
-describe("whatPercent", () => {
-  it("75 is 75% of 100", () => {
-    const r = whatPercent(75, 100);
-    expect(isPercentageError(r)).toBe(false);
-    if (!isPercentageError(r)) expect(r.result).toBe(75);
+describe("percentage calculations", () => {
+  it("calculates X percent of Y", () => {
+    expect(percentOf(25, 200)).toEqual({ mode: "of", result: 50 });
   });
 
-  it("100 of 125 is 80%", () => {
-    const r = whatPercent(100, 125);
-    if (!isPercentageError(r)) expect(r.result).toBe(80);
+  it("calculates what percent X is of Y", () => {
+    expect(whatPercent(25, 200)).toEqual({ mode: "isWhatPercent", result: 12.5 });
   });
 
-  it("returns DIVIDE_BY_ZERO when base is 0", () => {
-    const r = whatPercent(10, 0);
-    expect(isPercentageError(r) && r.code).toBe("DIVIDE_BY_ZERO");
-  });
-});
-
-describe("percentOf", () => {
-  it("20% of 50 is 10", () => {
-    const r = percentOf(20, 50);
-    if (!isPercentageError(r)) expect(r.result).toBe(10);
-  });
-});
-
-describe("percentChange", () => {
-  it("detects an increase", () => {
-    const r = percentChange(50, 75);
-    if (!isPercentageError(r) && r.mode === "change") {
-      expect(r.direction).toBe("increase");
-      expect(r.result).toBe(50);
-    }
+  it("rejects a zero base for what-percent", () => {
+    const result = whatPercent(25, 0);
+    expect(isPercentageError(result) && result.code).toBe("DIVIDE_BY_ZERO");
   });
 
-  it("detects a decrease", () => {
-    const r = percentChange(100, 60);
-    if (!isPercentageError(r) && r.mode === "change") {
-      expect(r.direction).toBe("decrease");
-      expect(r.result).toBe(40);
-    }
+  it("calculates percentage increase", () => {
+    expect(percentChange(100, 125)).toEqual({
+      mode: "change",
+      result: 25,
+      direction: "increase",
+    });
   });
 
-  it("returns DIVIDE_BY_ZERO when starting from 0", () => {
-    const r = percentChange(0, 50);
-    expect(isPercentageError(r) && r.code).toBe("DIVIDE_BY_ZERO");
-  });
-});
-
-describe("percentDifference", () => {
-  it("calculates symmetric difference", () => {
-    const r = percentDifference(10, 20);
-    if (!isPercentageError(r)) expect(r.result).toBeCloseTo(66.67, 1);
+  it("calculates percentage decrease", () => {
+    expect(percentChange(100, 80)).toEqual({
+      mode: "change",
+      result: 20,
+      direction: "decrease",
+    });
   });
 
-  it("never returns NaN or Infinity for valid input", () => {
-    const r = percentDifference(5, 5);
-    if (!isPercentageError(r)) expect(Number.isFinite(r.result)).toBe(true);
+  it("calculates symmetric percentage difference", () => {
+    expect(percentDifference(100, 120)).toEqual({ mode: "difference", result: 18.18 });
+  });
+
+  it("rejects a zero denominator in percentage difference", () => {
+    const result = percentDifference(5, -5);
+    expect(isPercentageError(result) && result.code).toBe("DIVIDE_BY_ZERO");
   });
 });
