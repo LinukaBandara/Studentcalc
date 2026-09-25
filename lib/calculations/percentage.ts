@@ -38,8 +38,11 @@ export function percentChange(from: number, to: number): PercentageResult | Perc
 /** Percentage difference between two values (symmetric) */
 export function percentDifference(a: number, b: number): PercentageResult | PercentageError {
   if (!isValidNumber(a) || !isValidNumber(b)) return { code: "INVALID_INPUT" };
-  if (a === 0 && b === 0) return { code: "DIVIDE_BY_ZERO" };
-  const raw = (Math.abs(a - b) / ((a + b) / 2)) * 100;
+
+  const denominator = (a + b) / 2;
+  if (denominator === 0) return { code: "DIVIDE_BY_ZERO" };
+
+  const raw = (Math.abs(a - b) / denominator) * 100;
   return { mode: "difference", result: Math.round(raw * 100) / 100 };
 }
 
