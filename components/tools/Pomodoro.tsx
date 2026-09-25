@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
 
 type Phase = "focus" | "shortBreak" | "longBreak";
 
@@ -91,20 +91,20 @@ export default function Pomodoro() {
       <details className="mt-8 text-left">
         <summary className="cursor-pointer text-sm font-medium text-navy">Customize</summary>
         <div className="grid grid-cols-2 gap-3 mt-3">
-          {[
+          {([
             ["Focus (min)", focusMin, setFocusMin],
             ["Short break (min)", shortBreakMin, setShortBreakMin],
             ["Long break (min)", longBreakMin, setLongBreakMin],
             ["Sessions before long break", sessionsBeforeLongBreak, setSessionsBeforeLongBreak],
-          ].map(([label, val, setter]) => (
-            <label key={label as string} className="text-xs text-slate">
+          ] as Array<[string, number, Dispatch<SetStateAction<number>>]>).map(([label, val, setter]) => (
+            <label key={label} className="text-xs text-slate">
               {label}
               <input
                 type="number"
                 min={1}
-                value={val as number}
+                value={val}
                 onChange={(e) => {
-                  (setter as (n: number) => void)(Math.max(1, parseInt(e.target.value) || 1));
+                  setter(Math.max(1, parseInt(e.target.value) || 1));
                   reset();
                 }}
                 className="mt-1 w-full min-h-[40px] rounded-card border border-borderc px-2 text-sm"
