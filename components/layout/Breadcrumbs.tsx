@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getSiteUrl } from "@/lib/site";
 
 export interface Crumb {
   name: string;
@@ -6,6 +7,8 @@ export interface Crumb {
 }
 
 export function breadcrumbJsonLd(crumbs: Crumb[]) {
+  const siteUrl = getSiteUrl();
+
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -13,7 +16,7 @@ export function breadcrumbJsonLd(crumbs: Crumb[]) {
       "@type": "ListItem",
       position: i + 1,
       name: c.name,
-      item: c.href,
+      item: new URL(c.href, siteUrl).toString(),
     })),
   };
 }
