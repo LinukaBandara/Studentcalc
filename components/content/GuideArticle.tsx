@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
+import { getSiteUrl, SITE_NAME } from "@/lib/site";
 
 export interface GuideRelated {
   href: string;
@@ -10,7 +11,7 @@ export interface GuideArticleProps {
   title: string;
   slug: string;
   shortAnswer: string;
-  children: React.ReactNode; // explanation + formula + worked example + common mistakes
+  children: React.ReactNode;
   relatedCalculator?: GuideRelated;
   relatedGuides?: GuideRelated[];
   faq?: { q: string; a: string }[];
@@ -25,12 +26,34 @@ export default function GuideArticle({
   relatedGuides,
   faq,
 }: GuideArticleProps) {
+  const siteUrl = getSiteUrl();
+  const articleUrl = `${siteUrl}/guides/${slug}`;
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: title,
     description: shortAnswer,
-    url: `/guides/${slug}`,
+    url: articleUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    image: [`${siteUrl}/og-image.png`],
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/og-image.png`,
+      },
+    },
   };
 
   const faqJsonLd =
