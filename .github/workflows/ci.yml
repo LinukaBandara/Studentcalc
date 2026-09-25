@@ -29,6 +29,6 @@ jobs:
       - name: Build
         env:
           NODE_ENV: production
-          NEXT_PUBLIC_SITE_URL: https://studentcalc.example
-          NEXT_PUBLIC_CONTACT_EMAIL: hello@studentcalc.example
+          NEXT_PUBLIC_SITE_URL: https://ci.invalid
+          NEXT_PUBLIC_CONTACT_EMAIL: ci@ci.invalid
         run: npm run build
