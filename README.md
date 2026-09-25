@@ -1,68 +1,96 @@
 # StudentCalc
 
-Simple tools for students. Next.js 14 (App Router) + TypeScript + Tailwind CSS.
+StudentCalc is a student utility website built with Next.js, TypeScript, and Tailwind CSS. It provides free calculators, study tools, and a focused Sri Lankan A/L resources section.
+
+## Stack
+
+- Next.js 15.5.26
+- React 19.2
+- TypeScript
+- Tailwind CSS
+- Vitest
+
+## Included
+
+- 9 calculators: GPA, percentage, grade, attendance, average, weighted average, marks needed, exam score, and study hours
+- 6 student tools: exam countdown, study timer, Pomodoro, study planner, semester planner, and assignment deadline tracker
+- Sri Lankan A/L section with Z-score education, university-selection overview, subject directory, and official resource links
+- 9 educational guides with related calculators
+- About, Contact, Privacy, Terms, Disclaimer, and FAQ pages
+- Custom 404 and error handling
+- XML sitemap and robots.txt
+- Breadcrumb, Website, Organization, Article, and FAQ structured data where appropriate
+- Client-side calculation and localStorage-based planning tools with no account requirement
+- Unit tests for the calculation engine
+- GitHub Actions CI for tests and production builds
+
+## Environment
+
+Copy `.env.example` to `.env.local` for local development:
+
+```
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_CONTACT_EMAIL=hello@your-domain.com
+```
+
+`NEXT_PUBLIC_SITE_URL` is required in production so canonical URLs, Open Graph URLs, JSON-LD, the sitemap, and robots.txt all use the real site.
+
+`NEXT_PUBLIC_CONTACT_EMAIL` should be configured before launch so the Contact page does not expose a placeholder address.
+
+For local development, the site URL automatically falls back to `http://localhost:3000`.
 
 ## Setup
 
-```bash
+```
 npm install
-npm run dev      # http://localhost:3000
-npm test         # runs the calculation-engine unit tests
-npm run build    # production build
+npm run dev
 ```
 
-## Build status — complete
+Open `http://localhost:3000`.
 
-All 16 planned phases and every planned public route are implemented:
+## Verification
 
-- **Foundation & design system**: strict TypeScript, Tailwind with the navy/emerald/mint
-  palette, Vitest, accessible focus states, reduced-motion support.
-- **Layout**: sticky header w/ mobile drawer, footer, skip-link.
-- **Homepage**: hero, popular calculators, A/L teaser.
-- **Calculator engine**: 10 pure, validated modules in `lib/calculations/` (gpa, percentage,
-  grade, attendance, average, weightedAverage, marksNeeded, examScore, studyHours, zscore) —
-  fully unit-tested in `tests/` (6 test files, no NaN/Infinity, all edge cases from the spec's
-  Section 63 covered).
-- **9 calculators**: GPA, Percentage, Grade, Attendance, Average, Weighted Average, Marks
-  Needed, Exam Score, Study Hours — each with working UI, SEO metadata, canonical URL,
-  breadcrumbs + JSON-LD.
-- **6 student tools**: Exam Countdown, Study Timer, Pomodoro, Study Planner, Semester
-  Planner, Assignment Deadline Tracker — all client-side, planners use `localStorage`.
-- **A/L section**: hub, Z-score explanation + calculator (clearly distinguished from the
-  official UGC methodology), university selection overview (no invented cutoffs), subject
-  streams directory, official resources links.
-- **9 guides**: each with short answer, explanation, formula, worked example, common
-  mistakes, related calculator, related guides — Article (+ FAQ where relevant) JSON-LD.
-- **Legal/info pages**: About, Contact (honest — no fake form backend), Privacy (documents
-  actual behavior: no accounts, no server-side data, localStorage usage explained,
-  no analytics/ads currently installed), Terms, Disclaimer, FAQ (with FAQPage JSON-LD).
-- **System**: custom 404 (`not-found.tsx`) and error boundary (`error.tsx`).
-- **SEO infra**: `sitemap.ts` and `robots.ts`, scoped to exactly the 41 indexable routes that
-  exist — no orphaned or placeholder pages included.
+Run the calculation tests:
 
-## Before deploying
+```
+npm test
+```
 
-1. Replace the placeholder `SITE_URL` (`https://studentcalc.example`) in `app/layout.tsx`,
-   `app/sitemap.ts`, and `app/robots.ts` with your real production domain.
-2. Add real assets: `public/og-image.png` (1200x630), `public/favicon.ico`,
-   `public/apple-touch-icon.png` — referenced in metadata but not yet created.
-3. Replace the placeholder contact email in `app/contact/page.tsx`.
-4. Run `npm install && npm run build` to confirm a clean production build, then `npm test`.
-5. If/when you add analytics or ads, update `app/privacy/page.tsx` first to name the exact
-   tool/network and what it collects — the current policy is accurate only for the current,
-   ad-free/analytics-free build.
+Run the production build with the required environment variables:
 
-## Monetization readiness (Section 56)
+```
+$env:NEXT_PUBLIC_SITE_URL="https://your-domain.com"
+$env:NEXT_PUBLIC_CONTACT_EMAIL="hello@your-domain.com"
+npm run build
+```
 
-No ads are wired in yet — the spec explicitly defers this. The site is now positioned for
-AdSense application: real content across 41 pages, a genuine privacy policy, no thin/spam
-pages, no fake stats or testimonials. When you're ready to monetize, ad slots can be added
-without restructuring anything.
+Then:
 
-## Not included in this build (would need dedicated follow-up passes)
+```
+npm start
+```
 
-- Full automated accessibility audit (axe/Lighthouse) — components follow semantic HTML,
-  label, and focus-state practices throughout, but no automated scan has been run.
-- Production `npm install` / `next build` — this environment has no network access, so the
-  build has not been executed here. Run it locally before deploying.
-- Real OG image, favicon, and apple-touch-icon assets (see step 2 above).
+## SEO notes
+
+The site uses canonical URLs, an XML sitemap, robots.txt, crawlable internal links, per-page metadata, and structured data.
+
+The sitemap uses a fixed content timestamp rather than regenerating `lastModified` on every request.
+
+Search-result URLs and other non-content states should not be submitted as indexable pages.
+
+The A/L section clearly distinguishes educational explanations from official admissions calculations and directs users to official sources for time-sensitive information.
+
+## Monetization
+
+No advertising code is included by default.
+
+Before adding analytics or advertising, update the Privacy Policy to accurately describe the exact services and data they introduce.
+
+For AdSense, configure the production domain first, deploy the complete site, verify indexing and core functionality, and then add the relevant ad code after the site is reviewed and approved.
+
+## Current limitations
+
+- The repository does not include a committed package-lock.json yet. Run `npm install` locally and commit the generated lockfile for reproducible installs.
+- A full Lighthouse/axe browser audit still needs to be run against the deployed site.
+- The real production domain and contact email must be supplied through environment variables before launch.
+- The production CI currently uses a placeholder URL only to satisfy the build-time required variable; replace it with the real domain once known.
