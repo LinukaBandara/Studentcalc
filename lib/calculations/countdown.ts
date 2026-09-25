@@ -14,15 +14,19 @@ export function calculateCountdown(
   now: Date = new Date()
 ): CountdownResult | CountdownError {
   const target = new Date(targetIso);
-  if (isNaN(target.getTime())) return { code: "INVALID_DATE" };
+  if (Number.isNaN(target.getTime())) return { code: "INVALID_DATE" };
 
   const diffMs = target.getTime() - now.getTime();
-  const isSameDay =
-    target.getFullYear() === now.getFullYear() &&
-    target.getMonth() === now.getMonth() &&
-    target.getDate() === now.getDate();
 
-  const status: CountdownResult["status"] = isSameDay ? "today" : diffMs < 0 ? "past" : "future";
+  // The calculator accepts ISO timestamps, so compare the calendar date in UTC
+  // rather than depending on the machine's local timezone.
+  const isSameUtcDay =
+    target.getUTCFullYear() === now.getUTCFullYear() &&
+    target.getUTCMonth() === now.getUTCMonth() &&
+    target.getUTCDate() === now.getUTCDate();
+
+  const status: CountdownResult["status"] =
+    isSameUtcDay ? "today" : diffMs < 0 ? "past" : "future";
   const abs = Math.abs(diffMs);
 
   const days = Math.floor(abs / (1000 * 60 * 60 * 24));
