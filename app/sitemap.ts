@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site";
 
-const SITE_URL = "https://studentcalc.example"; // TODO: replace with real production domain
+const SITE_URL = getSiteUrl();
+const INITIAL_CONTENT_DATE = new Date("2026-09-25T19:56:35Z");
 
-// NOTE: extend this list as each phase adds real, implemented routes.
-// Never include a route here until its page actually exists (Section 37).
+// Only include real, canonical, publicly indexable routes.
+// lastModified should reflect a genuine content change, not the sitemap request time.
 const ROUTES = [
   "/",
   "/calculators",
@@ -49,8 +51,6 @@ const ROUTES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return ROUTES.map((path) => ({
     url: `${SITE_URL}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: path === "/" ? 1 : 0.7,
+    lastModified: INITIAL_CONTENT_DATE,
   }));
 }
