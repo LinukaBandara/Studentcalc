@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { getSiteUrl, SITE_NAME } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,7 +11,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = "https://studentcalc.example"; // TODO: replace with real production domain
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     "Simple, accurate calculators and study tools for students — GPA, percentage, attendance, exam prep, and Sri Lankan A/L resources.",
   openGraph: {
     type: "website",
-    siteName: "StudentCalc",
+    siteName: SITE_NAME,
     title: "StudentCalc — Free Calculators & Study Tools for Students",
     description:
       "Simple, accurate calculators and study tools for students — GPA, percentage, attendance, exam prep, and Sri Lankan A/L resources.",
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "StudentCalc",
+  name: SITE_NAME,
   url: SITE_URL,
   description:
     "Free calculators and study tools for students — GPA, percentage, attendance, exam prep, and Sri Lankan A/L resources.",
@@ -57,9 +58,9 @@ const websiteJsonLd = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "StudentCalc",
+  name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/favicon.ico`,
+  logo: `${SITE_URL}/og-image.png`,
   description:
     "An independent student utility site providing free calculators and study tools. Not affiliated with any government, examination, or university body.",
 };
