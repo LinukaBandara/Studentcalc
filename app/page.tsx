@@ -15,7 +15,7 @@ export default function HomePage() {
     <>
       <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold text-navy tracking-tight">
-          Simple tools for students.
+          Free Student Calculators & Study Tools
         </h1>
         <p className="mt-4 text-lg text-slate max-w-xl mx-auto">
           Calculate grades, plan your study time, track attendance, prepare for exams, and more —
