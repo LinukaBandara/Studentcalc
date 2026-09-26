@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+  verification: {
+    google: "YOWIg2Fb_tETv8Zipja1KvuZFQ8dpLb5_PmvJL4mYj4",
+  },
 };
 
 const websiteJsonLd = {
